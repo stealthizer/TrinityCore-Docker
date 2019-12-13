@@ -6,7 +6,7 @@ RUN apt-get update && apt-get -y install git clang cmake make gcc g++ libmariadb
 RUN mkdir /TrinityCore
 RUN git clone -b 3.3.5 git://github.com/TrinityCore/TrinityCore.git /Trinity
 RUN mkdir -p /Trinity/build && cd /Trinity/build && cmake ../ -DCMAKE_INSTALL_PREFIX=/TrinityCore && make && make -j $(nproc) install
-FROM alpine
+FROM ubuntu:19.04
 COPY --from=builder /TrinityCore /TrinityCore
 WORKDIR /TrinityCore
 
