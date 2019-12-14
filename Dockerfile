@@ -11,7 +11,10 @@ RUN mkdir /TrinityCore
 RUN git clone -b 3.3.5 git://github.com/TrinityCore/TrinityCore.git /Trinity
 RUN mkdir -p /Trinity/build && cd /Trinity/build && cmake ../ -DCMAKE_INSTALL_PREFIX=/TrinityCore && make && make -j $(nproc) install
 FROM ubuntu:19.04
-RUN apt-get update && apt-get -y install libmariadb3 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get -y install libmariadb3 libboost-system1.67 libboost-filesystem1.67 \
+       libboost-thread1.67 libboost-program-options1.67 libboost-iostreams1.67 libssl1.1\
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /TrinityCore /TrinityCore
 WORKDIR /TrinityCore
 
