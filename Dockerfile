@@ -14,6 +14,7 @@ FROM ubuntu:19.04
 RUN apt-get update \
     && apt-get -y install libmariadb3 libboost-system1.67 libboost-filesystem1.67 \
        libboost-thread1.67 libboost-program-options1.67 libboost-iostreams1.67 libssl1.1\
+       libreadline8 \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /TrinityCore /TrinityCore
 WORKDIR /TrinityCore
